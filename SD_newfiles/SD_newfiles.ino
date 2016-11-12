@@ -63,16 +63,17 @@ void setup(void)
 {
   /* Sets the baud rate for serial monitor */
   Serial.begin(115200);
+  Serial.println("start");
 
   /* Assign pin to read data from hall effect */  
   pinMode(hall_effect, INPUT);
-  
+  Serial.println("more");
   /* Initialize lcd */
   lcd.begin(16, 2);
-
+  Serial.println("more");
    /* Enable auto-ranging */
   gyro.enableAutoRange( true );
-  
+  Serial.println("more");
   /* Initialize the gyro and accel */
   if( !gyro.begin() ) {
     /* There was a problem detecting the L3GD20 ... check your connections */
@@ -84,9 +85,8 @@ void setup(void)
     Serial.println( "Ooops, no LSM303 detected ... Check your wiring!" );
     while ( 1 );
   }
-
+  Serial.println("more");
   /* Setup SD card */
-  
   Serial.print("Initializing SD card...");
 
   // see if the card is present and can be initialized:
@@ -148,15 +148,14 @@ void loop(void)
   /* Printing */
   
   /* Print in serial monitor */
-  Serial.print("ax: ");     Serial.print(ax_sensVal);
-  Serial.print(" ay: ");    Serial.print(ay_sensVal);
-  Serial.print(" az: ");    Serial.print(az_sensVal);
-  Serial.print(" -- ");
-  Serial.print("gx: ");     Serial.print(gx_sensVal);
-  Serial.print(" gy: ");    Serial.print(gy_sensVal);
-  Serial.print(" gz: ");    Serial.print(gz_sensVal);
-  //Serial.println();
-  Serial.print("     ");    Serial.println(rpm);
+  Serial.print(ax_sensVal); Serial.print("\t");
+  Serial.print(ay_sensVal); Serial.print("\t");
+  Serial.print(az_sensVal); Serial.print("\t");
+  Serial.print(gx_sensVal); Serial.print("\t");
+  Serial.print(gy_sensVal); Serial.print("\t");
+  Serial.print(gz_sensVal); Serial.print("\t");
+  Serial.println();
+  //Serial.print("     ");    Serial.println(rpm);
 
   /* Print on lcd */
   /*
@@ -174,17 +173,16 @@ void loop(void)
   {
     if(firstiteration)
     {
-      dataFile.println("ACCEL X    Y    Z    GYRO X    Y    Z    RPM  TIME");
+      dataFile.println("X\tY\tZ\tX\tY\tZ\tRPM\tTIME");
     }
-    dataFile.print("      ");
-    dataFile.print(ax_sensVal, 4.2); dataFile.print(" ");
-    dataFile.print(ay_sensVal, 4.2); dataFile.print(" ");
-    dataFile.print(az_sensVal, 4.2); dataFile.print("         ");
-    dataFile.print(gx_sensVal, 4.2); dataFile.print(" ");
-    dataFile.print(gy_sensVal, 4.2); dataFile.print(" ");
-    dataFile.print(gz_sensVal, 4.2); dataFile.print(" ");
-    dataFile.print(rpm); dataFile.print(" ");
-    dataFile.println(timecurrent); dataFile.print(" ");
+    dataFile.print(ax_sensVal); dataFile.print("\t");
+    dataFile.print(ay_sensVal); dataFile.print("\t");
+    dataFile.print(az_sensVal); dataFile.print("\t");
+    dataFile.print(gx_sensVal); dataFile.print("\t");
+    dataFile.print(gy_sensVal); dataFile.print("\t");
+    dataFile.print(gz_sensVal); dataFile.print("\t");
+    dataFile.print(rpm); dataFile.print("\t");
+    dataFile.println(timecurrent);
 
     dataFile.close();
   }
