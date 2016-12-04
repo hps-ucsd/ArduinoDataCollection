@@ -41,7 +41,7 @@ sensors_vec_t orientation;
 /* LCD */
 LiquidCrystal lcd(12, 11, 10, 9, 8, 7);
 
-/* Hall Effect */
+/*Hall Effect */
 const int hall_effect = 2;
 int hall_effect_state = 0, last_state = 0;
 unsigned long timecurrent = 0, timeold = 0;
@@ -117,12 +117,12 @@ void loop(void)
 
     rpm = 60000 / (timecurrent - timeold);
     
-    Serial.print(rpm);
+    //Serial.print(rpm);
     //Serial.print("  ---  "); Serial.print(timecurrent);
     //Serial.print("  ---  "); Serial.print(timeold); 
 
     timeold = timecurrent;
-    Serial.println();
+    //Serial.println();
   } 
 
   last_state = hall_effect_state;
@@ -155,7 +155,7 @@ void loop(void)
   Serial.print(gy_sensVal); Serial.print("\t");
   Serial.print(gz_sensVal); Serial.print("\t");
   Serial.println();
-  //Serial.print("     ");    Serial.println(rpm);
+  //Serial.print(rpm);        Serial.println("");
 
   /* Print on lcd */
   /*

@@ -1,4 +1,4 @@
-const int hall_effect = 2;
+const int hall_effect = 7;
 int hall_effect_state = 0, last_state = 0;
 int timecurrent = 0, timeold = 0;
 float rpm = 0;
@@ -13,7 +13,7 @@ void loop() {
   hall_effect_state = digitalRead(hall_effect);
   if ((hall_effect_state != last_state) && hall_effect_state == LOW)
   {
-    //Serial.println("detect");
+    Serial.println("detect");
     
     timecurrent = millis();
     rpm = 60000 / (timecurrent - timeold);
